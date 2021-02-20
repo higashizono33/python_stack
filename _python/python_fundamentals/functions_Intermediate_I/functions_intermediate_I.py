@@ -1,3 +1,4 @@
+#changed folder name
 import random
 import math
 #print(randInt()) 		    # should print a random integer between 0 to 100
