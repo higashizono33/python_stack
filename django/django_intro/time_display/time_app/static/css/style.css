@@ -1,0 +1,19 @@
+li {
+    display: table;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 2.5em;
+}
+
+#time1 {
+    color: blueviolet;
+}
+#time2 {
+    color: brown;
+}
+#time3 {
+    color:green;
+}
+#time4 {
+    color: coral;
+}
