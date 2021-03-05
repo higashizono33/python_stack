@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+</head>
+<body>
+    <form action="result/" method="post">
+        {% csrf_token %}
+        <p>Your Name: <input name="one" type="text"></p>
+        <p>Dojo Location: 
+            <select name="two" id="location">
+                <option value="Seattle">Seattle</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Los Angles">Los Angles</option>
+            </select>
+        </p>
+        <p>Favorite Language: 
+            <select name="three" id="language">
+                <option value="HTML/CSS">HTML/CSS</option>
+                <option value="Javascript">Javascript</option>
+                <option value="Python">Python</option>
+            </select>
+        </p>
+        <p>Favorite Sport: 
+            <input type="radio" id="basketball" name="four" value="Basketball">
+            <label for="basketball">Basketball</label>
+            <input type="radio" id="football" name="four" value="Football">
+            <label for="football">Football</label>
+            <input type="radio" id="baseball" name="four" value="Baseball">
+            <label for="baseball">Baseball</label>
+        </p>
+        <p>Gender: 
+            <input type="checkbox" id="male" name="five" value="Male">
+            <label for="male">Male</label>
+            <input type="checkbox" id="female" name="five" value="Female">
+            <label for="female">Female</label>
+        </p>
+        <p>Comment(optional): <textarea name="six" id="comment" cols="55" rows="10"></textarea></p>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

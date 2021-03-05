@@ -1,0 +1,16 @@
+form {
+    width: 480px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    outline: 2px solid black;
+}
+button {
+    background: green;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+}
