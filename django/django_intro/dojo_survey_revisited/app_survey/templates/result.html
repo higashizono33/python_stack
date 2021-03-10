@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+</head>
+<body>
+    {% csrf_token %}
+    <div>
+        <h1>Submitted Info</h1>
+        <ul>
+            <li><span>Your Name: </span>{{ name }}</li>
+            <li><span>Dojo Location: </span>{{ loc }}</li>
+            <li><span>Favorite Language: </span>{{ lang }}</li>
+            <li><span>Favorite Sports: </span>{{ sport }}</li>
+            <li><span>Gender: </span>{{ sex }}</li>
+            <li><span>Comment: </span><br>{{ comment }}</li>
+        </ul>
+    </div>
+</body>
+</html>
