@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <p>Attempt: {{request.session.counter}}</p>
+    <p>Your Gold: {{request.session.gold}}</p>
+    <div class="button">
+        <label for="farm">Farm:
+            <button type="submit" name="farm" value="farm" id="farm"><a href="/process_money/farm">Find Gold!!</a></button>
+        </label>
+    </div>
+    <div class="button">
+        <label for="cave">Cave:
+            <button type="submit" name="cave" value="cave" id="cave"><a href="/process_money/cave">Find Gold!!</a></button>
+        </label>
+    </div>
+    <div class="button">
+        <label for="house">House:
+            <button type="submit" name="house" value="house" id="house"><a href="/process_money/house">Find Gold!!</a></button>
+        </label>
+    </div>
+    <div class="button">
+        <label for="casino">Casino:
+            <button type="submit" name="casino" value="casino" id="casino"><a href="/process_money/casino">Find Gold!!</a></button>
+        </label>
+    </div>
+    <a href="/reset" id="reset">reset</a>
+    <p>Histories:</p>
+    <div class="transactions">
+        {% for transaction in request.session.transactions reversed %}
+            {% if 'Earned' in transaction %}
+                <p class="green">{{ transaction }}</p>
+            {% else %}
+                <p class="red">{{ transaction }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
