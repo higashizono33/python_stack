@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 (djangoPy3Env) (base) takashi@Keis-Air single_model_orm % python manage.py shell \
+Python 3.8.5 (default, Sep  4 2020, 02:22:02) \
+[Clang 10.0.0 ] on darwin\
+Type "help", "copyright", "credits" or "license" for more information.\
+(InteractiveConsole)\
+>>> from users_app.models import *\
+>>> first_user = Users.objects.create(first_name="Michael", last_name="Jordan", email="m_jordan@example.com, age=56)\
+  File "<console>", line 1\
+    first_user = Users.objects.create(first_name="Michael", last_name="Jordan", email="m_jordan@example.com, age=56)\
+                                                                                                                   ^\
+SyntaxError: EOL while scanning string literal\
+>>> first_user = Users.objects.create(first_name="Michael", last_name="Jordan", email="m_jordan@example.com", age=56)\
+>>> print(first_user)\
+Users object (1)\
+>>> print(first_user.id)\
+1\
+>>> first_user.save()\
+>>> Users.objects.first()\
+<Users: Users object (1)>\
+>>> Users.objects.get(id=1).__dict__\
+\{'_state': <django.db.models.base.ModelState object at 0x7fe79d5e99d0>, 'id': 1, 'first_name': 'Michael', 'last_name': 'Jordan', 'email': 'm_jordan@example.com', 'age': 56, 'created_at': datetime.datetime(2021, 3, 12, 3, 42, 48, 719602, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 3, 12, 3, 44, 14, 72813, tzinfo=<UTC>)\}\
+>>> second_user = Users.objects.create(first_name="Vince", last_name="Carter", email="v_carter@example.com", age=43)\
+>>> print(second_user.id)\
+2\
+>>> second_user.save()\
+>>> third_user = Users.objects.create(first_name="Stephan", last_name="Curry", email="s_curry@example.com", age=32)\
+>>> third_user.save()\
+>>> Users.objects.all()\
+<QuerySet [<Users: Users object (1)>, <Users: Users object (2)>, <Users: Users object (3)>]>\
+>>> Users.objects.last()\
+<Users: Users object (3)>\
+>>> Users.objects.first()\
+<Users: Users object (1)>\
+>>> c = Users.objects.get(id=3)\
+>>> c.last_name = "Pancakes"\
+>>> c.save()\
+>>> Users.objects.get(id=3).__dict__\
+\{'_state': <django.db.models.base.ModelState object at 0x7fe79d72e280>, 'id': 3, 'first_name': 'Stephan', 'last_name': 'Pancakes', 'email': 's_curry@example.com', 'age': 32, 'created_at': datetime.datetime(2021, 3, 12, 3, 50, 3, 512866, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 3, 12, 3, 54, 23, 579527, tzinfo=<UTC>)\}\
+>>> c = Users.objects.get(id=2)\
+>>> c.delete()\
+(1, \{'users_app.Users': 1\})\
+>>> Users.objects.all()\
+<QuerySet [<Users: Users object (1)>, <Users: Users object (3)>]>\
+>>> Users.objects.all().order_by("-first_name")\
+<QuerySet [<Users: Users object (3)>, <Users: Users object (1)>]>\
+>>> Users.objects.all()\
+<QuerySet [<Users: Users object (1)>, <Users: Users object (3)>]>\
+>>> Users.objects.all().order_by("-first_name")\
+<QuerySet [<Users: Users object (3)>, <Users: Users object (1)>]>\
+>>> new = Users.objects.create(first_name="James", last_name="Harden", email="j_harden@example.com", age=30)\
+>>> new.save()\
+>>> new = Users.objects.create(first_name="Damian", last_name="Lillard", email="d_Lillard@example.com", age=25)\
+>>> new.save()\
+>>> Users.objects.all()\
+<QuerySet [<Users: Users object (1)>, <Users: Users object (3)>, <Users: Users object (4)>, <Users: Users object (5)>]>\
+>>> Users.objects.all().order_by("first_name")\
+<QuerySet [<Users: Users object (5)>, <Users: Users object (4)>, <Users: Users object (1)>, <Users: Users object (3)>]>\
+>>> Users.objects.all().order_by("-first_name")\
+<QuerySet [<Users: Users object (3)>, <Users: Users object (1)>, <Users: Users object (4)>, <Users: Users object (5)>]>\
+>>> \
+}
