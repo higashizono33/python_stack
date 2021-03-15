@@ -1,0 +1,265 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 (djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py makemigrations\
+Traceback (most recent call last):\
+  File "manage.py", line 21, in <module>\
+    main()\
+  File "manage.py", line 17, in main\
+    execute_from_command_line(sys.argv)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line\
+    utility.execute()\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute\
+    django.setup()\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup\
+    apps.populate(settings.INSTALLED_APPS)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate\
+    app_config.import_models()\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models\
+    self.models_module = import_module(models_module_name)\
+  File "/Users/takashi/opt/anaconda3/lib/python3.8/importlib/__init__.py", line 127, in import_module\
+    return _bootstrap._gcd_import(name[level:], package, level)\
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load\
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked\
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked\
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module\
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/django/django_orm/book_authors_proj/books_authors_app/models.py", line 4, in <module>\
+    class Book(models.Model):\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/django/django_orm/book_authors_proj/books_authors_app/models.py", line 6, in Book\
+    desc = models.Text()\
+AttributeError: module 'django.db.models' has no attribute 'Text'\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py makemigrations\
+Migrations for 'books_authors_app':\
+  books_authors_app/migrations/0001_initial.py\
+    - Create model Book\
+    - Create model Author\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py migrate\
+Operations to perform:\
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions\
+Running migrations:\
+  Applying contenttypes.0001_initial... OK\
+  Applying auth.0001_initial... OK\
+  Applying admin.0001_initial... OK\
+  Applying admin.0002_logentry_remove_auto_add... OK\
+  Applying admin.0003_logentry_add_action_flag_choices... OK\
+  Applying contenttypes.0002_remove_content_type_name... OK\
+  Applying auth.0002_alter_permission_name_max_length... OK\
+  Applying auth.0003_alter_user_email_max_length... OK\
+  Applying auth.0004_alter_user_username_opts... OK\
+  Applying auth.0005_alter_user_last_login_null... OK\
+  Applying auth.0006_require_contenttypes_0002... OK\
+  Applying auth.0007_alter_validators_add_error_messages... OK\
+  Applying auth.0008_alter_user_username_max_length... OK\
+  Applying auth.0009_alter_user_last_name_max_length... OK\
+  Applying auth.0010_alter_group_name_max_length... OK\
+  Applying auth.0011_update_proxy_permissions... OK\
+  Applying books_authors_app.0001_initial... OK\
+  Applying sessions.0001_initial... OK\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py shell.py\
+Unknown command: 'shell.py'. Did you mean shell?\
+Type 'manage.py help' for usage.\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py shell  \
+Python 3.8.5 (default, Sep  4 2020, 02:22:02) \
+[Clang 10.0.0 ] on darwin\
+Type "help", "copyright", "credits" or "license" for more information.\
+(InteractiveConsole)\
+>>> from book_authers_app.models import Book, Author\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+ModuleNotFoundError: No module named 'book_authers_app'\
+>>> from books_authers_app.models import Book, Author\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+ModuleNotFoundError: No module named 'books_authers_app'\
+>>> from books_authors_app.models import Book, Author\
+>>> c_sharp = Book.objects.create(name="C Sharp")\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/manager.py", line 82, in manager_method\
+    return getattr(self.get_queryset(), name)(*args, **kwargs)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/query.py", line 420, in create\
+    obj = self.model(**kwargs)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/base.py", line 501, in __init__\
+    raise TypeError("%s() got an unexpected keyword argument '%s'" % (cls.__name__, kwarg))\
+TypeError: Book() got an unexpected keyword argument 'name'\
+>>> c_sharp = Book.objects.create(title="C Sharp")\
+>>> java = Book.objects.create(title="Java")\
+>>> python = Book.objects.create(title="Python")\
+>>> php = Book.objects.create(title="PHP")\
+>>> ruby = Book.objects.create(title="Ruby")\
+>>> books = Book.objects.all()\
+>>> print(books)\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>\
+>>> jane_austen = Author.objects.create(first_name="Jane", last_name="Austen"\
+... jane_austen = Author.objects.create(first_name="Jane", last_name="Austen")\
+  File "<console>", line 2\
+    jane_austen = Author.objects.create(first_name="Jane", last_name="Austen")\
+    ^\
+SyntaxError: invalid syntax\
+>>> jane_austen = Author.objects.create(first_name="Jane", last_name="Austen")\
+>>> emily_Dickinson = Author.objects.create(first_name="Emily", last_name="Dickinson"\
+... emily_Dickinson = Author.objects.create(first_name="Emily", last_name="Dickinson")\
+  File "<console>", line 2\
+    emily_Dickinson = Author.objects.create(first_name="Emily", last_name="Dickinson")\
+    ^\
+SyntaxError: invalid syntax\
+>>> emily_Dickinson = Author.objects.create(first_name="Emily", last_name="Dickinson")\
+>>> fyodor_dostoevsky = Author.objects.create(first_name="Fyodor", last_name="Dostoevsky")\
+>>> william_shakespeare = Author.objects.create(first_name="William", last_name="Shakespeare")\
+>>> lau_tzu = Author.objects.create(first_name="Lau", last_name="Tzu")\
+>>> authors = Author.objects.all()\
+>>> print(authors)\
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>\
+>>> \
+KeyboardInterrupt\
+>>> \
+now exiting InteractiveConsole...\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py makemigrations\
+Migrations for 'books_authors_app':\
+  books_authors_app/migrations/0002_author_note.py\
+    - Add field note to author\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py migrate       \
+Operations to perform:\
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions\
+Running migrations:\
+  Applying books_authors_app.0002_author_note... OK\
+(djangoPy3Env) (base) takashi@Keis-Air book_authors_proj % python manage.py shell         \
+Python 3.8.5 (default, Sep  4 2020, 02:22:02) \
+[Clang 10.0.0 ] on darwin\
+Type "help", "copyright", "credits" or "license" for more information.\
+(InteractiveConsole)\
+>>> from books_authors_app.models import Book, Author\
+>>> c_sharp = Book.objects.get(id=1)\
+>>> c_sharp.title = "C#"\
+>>> c_sharp.save()\
+>>> print(c_sharp.title)\
+C#\
+>>> c = Author.objects.get(id=4)\
+>>> c.first_name = "Bill"\
+>>> c.save()\
+>>> print(c.first_name)\
+Bill\
+>>> first_author = Author.objects.first()\
+>>> first_book = Book.objects.first()\
+>>> second_book = Book.objects.get(id=2)\
+>>> third_book = Book.objects.get(id=3)\
+>>> second_author = Author.objects.get(id=2)\
+>>> first_author.books.add(first_book)\
+>>> print(first_author.books)\
+books_authors_app.Book.None\
+>>> print(first_author.first_name)\
+Jane\
+>>> print(first_author.name)\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+AttributeError: 'Author' object has no attribute 'name'\
+>>> first_author.books.add(second_book)\
+>>> first_author.books.all()\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>\
+>>> second_author.books.add(first_book)\
+>>> second_author.books.add(second_book)\
+>>> second_author.books.add(third_book)\
+>>> second_author.books.all()\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>\
+>>> third_author = Author.objects.get(id=3)\
+>>> forth_book = Book.objects.get(id=4)\
+>>> third_author.books.add(first_book)\
+>>> third_author.books.add(second_book)\
+>>> third_author.books.add(third_book)\
+>>> third_author.books.add(forth_book)\
+>>> third_author.books.all()\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>\
+>>> fourth_author = Author.objects.get(id=4)\
+>>> all_books = Book.objects.all()\
+>>> fourth_author.books.add(all_books)\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/related_descriptors.py", line 963, in add\
+    self._add_items(\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/related_descriptors.py", line 1088, in _add_items\
+    vals = (self.through._default_manager.using(db)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/query.py", line 892, in filter\
+    return self._filter_or_exclude(False, *args, **kwargs)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/query.py", line 910, in _filter_or_exclude\
+    clone.query.add_q(Q(*args, **kwargs))\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1290, in add_q\
+    clause, _ = self._add_q(q_object, self.used_aliases)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1315, in _add_q\
+    child_clause, needed_inner = self.build_filter(\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1251, in build_filter\
+    condition = self.build_lookup(lookups, col, value)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1116, in build_lookup\
+    lookup = lookup_class(lhs, rhs)\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/lookups.py", line 20, in __init__\
+    self.rhs = self.get_prep_lookup()\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/related_lookups.py", line 59, in get_prep_lookup\
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/related_lookups.py", line 59, in <listcomp>\
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 966, in get_prep_value\
+    return int(value)\
+TypeError: int() argument must be a string, a bytes-like object or a number, not 'QuerySet'\
+>>> print(all_books)\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>\
+>>> fourth_author.books = all_books\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+  File "/Users/takashi/Desktop/Documents/CodingDojo/python_stack/my_environments/djangoPy3Env/lib/python3.8/site-packages/django/db/models/fields/related_descriptors.py", line 536, in __set__\
+    raise TypeError(\
+TypeError: Direct assignment to the forward side of a many-to-many set is prohibited. Use books.set() instead.\
+>>> fourth_author.books.set(all_books)\
+>>> fourth_author.books.all()\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>\
+>>> print(Author.books.get(third_book)\
+... \
+... \
+KeyboardInterrupt\
+>>> third_book_authors = third_book.authors.all()\
+>>> print(third_book_authors)\
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>\
+>>> third_\
+third_author        third_book          third_book_authors  \
+>>> third_book\
+third_book          third_book_authors  \
+>>> third_book_authors.first().remove()\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+AttributeError: 'Author' object has no attribute 'remove'\
+>>> c = third_book_authors.first()\
+>>> third_book_authors.remove(c)\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+AttributeError: 'QuerySet' object has no attribute 'remove'\
+>>> print(c)\
+Author object (2)\
+>>> third_book_authors.delete(c)\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+TypeError: delete() takes 1 positional argument but 2 were given\
+>>> third_book.authors.remove(c)\
+>>> print(third_book.authors)\
+books_authors_app.Author.None\
+>>> print(third_book_authors)\
+<QuerySet [<Author: Author object (3)>, <Author: Author object (4)>]>\
+>>> second_books_authors = second_book.authors.all()\
+>>> print(second_books_authors)\
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>\
+>>> fifth_author = Author.objects.create(first_name="Steve", last_name="Kurr")\
+>>> second_book.authors.add(fifth_author)\
+>>> print(second_books_authors)\
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (6)>]>\
+>>> all_books_third_author = third_author.books.all()\
+>>> print(all_books_third_author)\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>\
+>>> fifth_book = Book.objects.get(id=5)\
+>>> fifth_book_authors = fifth_book.authors.all()\
+>>> print(fifth_book_authors)\
+<QuerySet [<Author: Author object (4)>]>\
+>>> \
+}

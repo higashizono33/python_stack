@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+div {
+    margin-right: 70px;
+}
+h3 {
+    color: royalblue;
+}
+input {
+    display: block;
+    margin-bottom: 10px;
+}
+textarea {
+    display: block;
+}
+button {
+    margin-top: 20px;
+    width: 80px;
+}
+table td{
+    outline: 1px solid black;
+    width: 150px;
+}
+table th{
+    outline: 1px solid black;
+}
