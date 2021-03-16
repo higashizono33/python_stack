@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+</head>
+<body>
+    <a href="/shows" id="back">Go Back</a>
+    <div class="wrapper">
+        <h1>TV Show {{ id }}</h1>
+        <h3>Title: {{ title }}</h3>
+        <h3>Network: {{ network }}</h3>
+        <h3>Release Date: {{ release_date|date:"M d, Y" }}</h3>
+        <h3 id="desc">Description: {{ description }}</h3>
+        <h3 id="updated_at">Last Updated: {{ updated_at }}</h3>
+        <div>
+            <a href="/shows/{{ id }}/edit">Edit</a> | <a href="/shows/{{ id }}/destroy">Delete</a>
+        </div>
+    </div>
+</body>
+</html>

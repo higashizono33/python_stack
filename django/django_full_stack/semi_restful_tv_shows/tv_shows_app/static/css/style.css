@@ -1,0 +1,59 @@
+table {
+    width: 640px;
+    margin: 20px auto;
+}
+th {
+    font-size: 1.5em;
+    outline: 2px solid black;
+}
+tr {
+    height: 30px;
+}
+td {
+    text-align: center;
+    outline: 2px solid black;
+}
+#add {
+    margin-left: 390px;
+    margin-top: 15px;
+}
+.wrapper {
+    width: 510px;
+    margin: 10px auto;
+}
+.wrapper h1{
+    margin-bottom: 50px;
+}
+form {
+    padding: 10px;
+}
+form > div {
+    margin-bottom: 30px;
+}
+input {
+    margin-right: 10px;
+    height: 20px;
+}
+#title {
+    width: 430px;
+}
+textarea {
+    width: 475px;
+}
+button {
+    width: 100px;
+    display: block;
+    margin: 50px auto;
+    margin-bottom: 20px;
+}
+#back {
+    display: block;
+    text-align: end;
+}
+#to_show {
+    display: block;
+    text-align: center;
+}
+.title {
+    margin-left: 325px;
+}
