@@ -11,11 +11,18 @@
 <body>
     <a href="/shows" id="back">Go Back</a>
     <div class="wrapper">
-        <h1>Add a New Show</h1>
-        <form action="/shows/edit/{{ id }}" method="POST">
+        <h1>Edit a New Show</h1>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/shows/{{ id }}/update" method="POST">
             {% csrf_token %}
-            <div>
-                <label for="title">Title: </label><input name="title" type="text" value="{{ title }}">
+            <div id="#section_title">
+                <label for="title">Title: </label><input name="title" type="text" value="{{ title }}" id="title">
             </div>
             <div>
                 <label for="network">Network: </label><input name="network" type="text" value="{{ network }}">
@@ -29,5 +36,26 @@
         </form>
         <a href="/shows/{{ id }}" id="to_show">Go To Show</a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% block javascript %}
+        <script>
+            $("#title").change(function() {
+                console.log($(this).val()); 
+                var title = $(this).val();
+                $.ajax({
+                    url: '/shows/ajax/validate_title',
+                    data: {
+                        'title': title
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.is_taken) {
+                            $("#section_title").append('<span> A Show with this title already exists.</span>')
+                        }
+                    }
+                });
+            });
+        </script>    
+    {% endblock %}
 </body>
 </html>

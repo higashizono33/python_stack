@@ -12,9 +12,16 @@
     <a href="/shows" id="back">Go Back</a>
     <div class="wrapper">
         <h1>Add a New Show</h1>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
         <form action="/shows/new/create" method="POST">
             {% csrf_token %}
-            <div>
+            <div id="section_title">
                 <label for="title">Title: </label><input name="title" type="text" id="title">
             </div>
             <div>
@@ -28,5 +35,26 @@
             <button type="submit">Create</button>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% block javascript %}
+        <script>
+            $("#title").change(function() {
+                // console.log($(this).val()); 
+                var title = $(this).val();
+                $.ajax({
+                    url: '/shows/ajax/validate_title',
+                    data: {
+                        'title': title
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.is_taken) {
+                            $("#section_title").append('<span> A Show with this title already exists.</span>')
+                        }
+                    }
+                });
+            });
+        </script>    
+    {% endblock %}
 </body>
 </html>
