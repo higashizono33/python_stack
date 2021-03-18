@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Course App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Add a new comment</h1>
+    <label for="name">Name:</label><p>{{ comment_course.name }}</p>
+    <label for="description">Description:</label><p>{{ comment_course.description.content }}</p>
+    <form action="/courses/comment/{{ comment_course.id }}/execute" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="comment" class="form-label">comment:</label>
+            <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Add</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <th>Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.comment }}</td>
+                    <td>{{ comment.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Go Back</a>
+</body>
+</html>

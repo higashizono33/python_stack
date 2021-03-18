@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Course App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <table class="table table-striped">
+        <h3>Add you sure to delete this course?</h1>
+        <label for="name">Name:</label><p>{{ delete_course.name }}</p>
+        <label for="description">Description:</label><p>{{ delete_course.description.content }}</p>
+        <button type="submit" class="btn-secondary mb-3"><a href="/" id="link">No</a></button>
+        <button type="submit" class="btn-danger mb-3"><a href="/courses/delete/{{ delete_course.id }}/execute" id="link">Yes, I want to delete this</a></button>
+</body>
+</html>
