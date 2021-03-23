@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wall App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-between align-items-center p-3 mb-2 bg-info text-dark">
+            <div class="col-4">
+                <h1>Coding Dojo Wall</h1>
+            </div>
+            <div class="col-4 text-end">
+                <h5>Welcome
+                    {{user.first_name}}!
+                    <a href="/logout" id="logout">Log Out</a>
+                </h5>
+            </div>
+        </div>
+        <p class="message_title">New Message</p>
+        <div class="row text-center">
+            <form action="/wall/post-message" method="POST">
+                {% csrf_token %}
+                <div>
+                    <textarea name="message" id="message" cols="100" rows="5"></textarea>
+                    <button type="submit" class="btn btn-primary" id="btn">POST Message</button>
+                </div>
+            </form>
+            <ul>
+                {% for message in messages %}
+                <li>{{message}}</li>
+                {% endfor %}
+            </ul>
+            {% for message in posted_messages %}
+                <div class="d-flex">
+                    <h5>{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at}}</h5>
+                    <form action="/wall/delete-message" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name='message_id' value="{{message.id}}">
+                        <input type="hidden" name='user_id' value="{{message.user.id}}">
+                        <button>Delete</button>
+                    </form>
+                </div>    
+                <p class="message mt-5 mb-5">{{message.message}}</p>
+                <p class="text-start"> - comments - </p>
+                {% for comment in message.comments.all %}
+                    <div class="d-flex justify-content-evenly">
+                        <p>{{comment.user.first_name}} {{comment.user.last_name}} - {{comment.user.created_at}}</p>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                {% endfor %}
+                <form action="/wall/post-comment" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <input type="hidden" name='message_id' value="{{message.id}}">
+                        <textarea name="comment" id="comment" cols="100" rows="2"></textarea>
+                        <button type="submit" class="btn btn-secondary">POST Comment</button>
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
