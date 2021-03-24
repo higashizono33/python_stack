@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="header d-flex justify-content-between bg-light">
+            <h1 class="m-3">Welcome, {{user.first_name}}</h1>
+            <a href="/books/logout" class="m-3 fs-4">Log Out</a>
+        </div>
+        <div class="row mt-5 d-flex justify-content-around">
+            {% if user.id is book.uploaded_by.id %}
+            <div class="col-md-5">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                <form action="/books/{{book.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <div class="container">
+                        <div class="row">
+                            <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Title:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-lg" id="colFormLabelLg" name="title" value="{{book.title}}">
+                            </div>
+                        </div>
+                        <p class="ps-5 ms-5">
+                            Added on: {{book.created_at}}<br>
+                            Last updated on: {{book.updated_at}}
+                        </p>
+                        <div class="row">
+                            <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Description:</label>
+                            <div class="col-sm-10 mt-5">
+                                <textarea name="description" id="" cols="50" rows="3">{{book.description}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                    </div>
+                </form>
+                <form action="/books/{{book.id}}/delete">
+                    <button type="submit" class="btn btn-danger btn-lg" style="position: absolute; left: 465px; top: 435px;">Delete</button>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <h2>Users Who likes this book</h2>
+                <ul>
+                    {% for like_user in like_users %}
+                    <li class="fs-5">
+                        <span class="me-3">{{like_user.first_name}}</span>
+                        {% if user.id is like_user.id %}
+                        <a href="/books/{{book.id}}/remove_favorite">Unfavorite</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <div class="col-md-5">
+                <h3><span class="fs-5 me-5">Title:</span>{{book.title}}</h3>
+                <p>
+                    Added on: {{book.created_at}}<br>
+                    Last updated on: {{book.updated_at}}
+                </p>
+                <p><span class="fs-5 me-5">Desc:</span>{{book.description}}</p>
+            </div>
+            <div class="col-md-5">
+                <h1>Users Who likes this book</h1>
+                <ul>
+                    {% for like_user in like_users %}
+                    <li class="fs-5 mb-0">{{like_user.first_name}}</li>
+                    {% endfor %}
+                </ul>
+                {% if user in like_users %}
+                <a href="/books/{{book.id}}/remove_favorite">Un-favorites</a>
+                {% else %}
+                <a href="/books/{{book.id}}/add_favorite">Add To Favorites</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
