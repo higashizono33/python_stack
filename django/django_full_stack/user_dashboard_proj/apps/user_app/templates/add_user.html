@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}New User{% endblock %}
+
+{% block navbar %}
+<a href="show/{{user.id}}" class="nav-link px-2 fs-3 link-dark">Test App</a>
+{% if user.user_level > 4 %}
+<a href="/dashboard/admin" class="nav-link px-4 fs-5 link-dark">Dashboard</a>
+{% else %}
+<a href="/dashboard" class="nav-link px-4 fs-5 link-dark">Dashboard</a>
+{% endif %}
+<a href="edit" class="nav-link px-4 fs-5 link-dark">Profile</a>
+{% endblock %}
+
+{% block button %}
+<button type="button" class="btn btn-outline-primary me-2"><a href="/users/logoff" class="text-decoration-none">Log-off</a></button>
+{% endblock %}
+
+{% block content %}
+<main class="form-signin row d-flex justify-content-between px-5">
+    <form action="/users/new/register" method="POST" class="col-4 mt-5">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Add a new user</h1>
+        <ul>
+            {% for message in messages %}
+            <li class="fst-italic text-danger">{{message}}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" placeholder="name@example.com" name="email">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="FirstName" name="first_name">
+            <label for="floatingInput">First name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="LastName" name="last_name">
+            <label for="floatingInput">Last name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Password" name="password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Password" name="confirm_password">
+            <label for="floatingPassword">Password Confirmation</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mt-5" type="submit">Create</button>
+    </form>
+    <div class="col-3">
+        <button class="w-100 btn btn-lg btn-primary mt-5" type="submit"><a href="/dashboard/admin" class="text-decoration-none text-white">Return to Dashboard</a></button>
+    </div>
+</main>
+{% endblock %}

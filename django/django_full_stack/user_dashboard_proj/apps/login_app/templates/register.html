@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Register Page{% endblock %}
+
+{% block content %}
+<main class="form-signin row d-flex justify-content-center">
+    <form action="/register/user" method="POST" class="col-4 mt-5">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+        <ul>
+            {% for message in messages %}
+            <li class="fst-italic text-danger">{{message}}</li>
+            {% endfor %}
+        </ul>
+    
+        <div class="form-floating">
+            <input type="email" class="form-control" placeholder="name@example.com" name="email">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="FirstName" name="first_name">
+            <label for="floatingInput">First name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="LastName" name="last_name">
+            <label for="floatingInput">Last name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Password" name="password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Password" name="confirm_password">
+            <label for="floatingPassword">Password Confirmation</label>
+        </div>
+        <div class="checkbox mb-3 mt-3">
+            <label>
+            <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Sign up</button>
+        <a href="/signin">Already have an account? Login</a>
+        </form>
+</main>
+{% endblock %}

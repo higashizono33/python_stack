@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}New User{% endblock %}
+
+{% block navbar %}
+<a href="/users/show/{{logged_user.id}}" class="nav-link px-2 fs-3 link-dark">Test App</a>
+{% if logged_user.user_level > 4 %}
+<a href="/dashboard/admin" class="nav-link px-4 fs-5 link-secondary">Dashboard</a>
+{% else %}
+<a href="/dashboard" class="nav-link px-4 fs-5 link-secondary">Dashboard</a>
+{% endif %}
+<a href="/users/edit" class="nav-link px-4 fs-5 link-secondary">Profile</a>
+{% endblock %}
+
+{% block button %}
+<button type="button" class="btn btn-outline-primary me-2"><a href="/users/logoff" class="text-decoration-none">Log-off</a></button>
+{% endblock %}
+
+{% block content %}
+<main class="form-signin row d-flex justify-content-between px-5">
+    <h1 class="h3 mb-5 fw-normal">{{user.first_name}} {{user.last_name}}</h1>
+    <h5>Registered at:<span class="ps-3">{{user.created_at}}</span></h5>
+    <h5>User ID:<span class="ps-3">{{user.id}}</span></h5>
+    <h5>Email address:<span class="ps-3">{{user.email}}</span></h5>
+    <h5>Description:<span class="ps-3">{{user.description}}</span></h5>
+    
+    <div class="container pe-5">
+        <form action="/users/{{user.id}}/message" method="POST" class="row mt-5 px-5">
+            {% csrf_token %}
+            <h5>Leave a message for {{user.first_name}}</h5>
+            <input type="hidden" name="id" value="{{user.id}}">
+            <div class="form-floating mt-3">
+                <textarea name="message" id="message" cols="130" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="w-10 btn btn-lg btn-success mt-5 px-5 mb-5" type="submit">Post</button>
+            </div>
+        </form>
+        {% for message in messages %}
+            <div class="d-flex justify-content-between me-5">
+                <span class="ms-5 fs-4">{{message.message_from.first_name}} {{message.message_from.last_name}} wrote</span>
+                <span class="ms-5 fs-5">{{message.created_at}}</span>
+            </div>
+            <div class="w-90 mx-5 mb-5 mt-2 p-2" style="outline: 1px solid black; height: 85px;">
+            {{message.message}}
+            </div>
+            {% for comment in message.comments.all %}
+            <div class="d-flex justify-content-between me-5">
+                <span class="ms-5 fs-4" style="padding-left: 100px;">{{comment.comment_from.first_name}} {{comment.comment_from.last_name}} wrote</span>
+                <span class="ms-5 fs-5">{{comment.created_at}}</span>
+            </div>
+            <div class="mb-5 mt-2 p-2" style="outline: 1px solid black; height: 80px; margin-left: 150px; width: 965px;">
+                {{comment.comment}}
+            </div>
+            {% endfor %}
+            <form action="/users/{{message.id}}/comment" method="POST" class="row px-5">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{user.id}}">
+                <div class="form-floating d-flex justify-content-end">
+                    <textarea name="comment" id="comment" cols="118" rows="3" placeholder="Write a message"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="w-10 btn btn-lg btn-success mt-5 px-5 mb-5" type="submit">Post</button>
+                </div>
+            </form>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
