@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
+from django.db.models import Count
 
 from .models import *
 # Create your views here.
@@ -15,7 +16,7 @@ def register(request):
     errors = User.objects.user_validator(request.POST) 
     if len(errors) > 0:
         for key, value in errors.items():
-            messages.error(request, value)
+            messages.add_message(request, 40, value, key)
         return redirect('/')
     else:
         name = request.POST['name']
@@ -41,7 +42,7 @@ def login(request):
     user = User.objects.filter(email=request.POST['email'])
     if len(errors) > 0:
         for key, value in errors.items():
-            messages.error(request, value)
+            messages.error(request, value, key)
         return redirect('/')
     else:    
         logged_user = user[0] 
@@ -50,13 +51,36 @@ def login(request):
 
 def home(request):
     user = User.objects.get(id=request.session['userid'])
-    # don't know how to make distinct on reviews in below
-    recent_reviews = Review.objects.all().order_by('-updated_at')[:3]
-    other_reviews = Review.objects.all().order_by('-updated_at')[3:]
+    # this is what I came up
+    recent_reviews = Review.objects.all().order_by('-updated_at')
+    recent_unique_reviews = [recent_reviews.first()]
+    for review in recent_reviews:
+        checker = 0
+        for unique in recent_unique_reviews:
+            if review.reviewed_to.title == unique.reviewed_to.title:
+                checker += 1
+        if checker == 0:
+            recent_unique_reviews.append(review)
+    print(recent_unique_reviews)
+
+    other_reviews = Review.objects.all().order_by('-updated_at')
+    other_unique_reviews = []
+    for review in other_reviews:
+        checker = 0
+        for unique in other_unique_reviews:
+            if review.reviewed_to.title == unique.reviewed_to.title:
+                checker += 1
+        for recent in recent_unique_reviews[:3]:
+            if review.reviewed_to.title == recent.reviewed_to.title:
+                checker += 1
+        if checker == 0:
+            other_unique_reviews.append(review)
+    print(other_unique_reviews)
+
     context = {
         'user': user,
-        'recent_reviews': recent_reviews,
-        'other_reviews': other_reviews,
+        'recent_reviews': recent_unique_reviews[:3],
+        'other_reviews': other_unique_reviews,
     }
     return render(request, 'home.html', context)
 
@@ -78,7 +102,7 @@ def create_book(request):
 
     if len(errors) > 0:
         for key, value in errors.items():
-            messages.error(request, value)
+            messages.add_message(request, key, value)
         return redirect('/books/add')
     else:
         title = request.POST['title']

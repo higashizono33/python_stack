@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
+from django.contrib.auth.decorators import login_required
 
 from .models import Users
 # Create your views here.
@@ -37,12 +38,16 @@ def login(request):
         return redirect('/success')
     return redirect("/")
 
+# tried to see how login_required works
+@login_required(login_url='/')
 def success_login(request):
-    try: 
-        user = Users.objects.get(id=request.session['userid'])
-        return render(request, 'user.html', {'user_name': user.first_name})
-    except:
-        return redirect('/')
+    return render(request, 'user.html')
+    
+    # try: 
+    #     user = Users.objects.get(id=request.session['userid'])
+    #     return render(request, 'user.html', {'user_name': user.first_name})
+    # except:
+    #     return redirect('/')
 
 def logout(request):
     request.session.flush()

@@ -10,12 +10,6 @@
 <body>
     <div class="container">
         <h1>Welcome!</h1>
-        <!-- don't know how to display error message below the input section -->
-        <ul>
-            {% for message in messages %}
-            <li>{{message}}</li>
-            {% endfor %}
-        </ul>
         <div class="row gx-5 mt-3">
             <div class="col-6">
                 <h3 class="mb-3">Registration</h3>
@@ -24,23 +18,48 @@
                     <div class="mb-3">
                         <label for="InputName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name">
+                        {% for message in messages %}
+                        {% if 'name error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="mb-3">
                         <label for="InputAlias" class="form-label">Alias</label>
                         <input type="text" class="form-control" id="alias" name="alias">
+                        {% for message in messages %}
+                        {% if 'alias error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="mb-3">
                         <label for="InputEmail1" class="form-label">Email</label>
                         <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="email">
+                        {% for message in messages %}
+                        {% if 'email error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="InputPassword" class="form-label">Password</label>
                         <input type="text" class="form-control" id="InputPassword" name="password">
+                        {% for message in messages %}
+                        {% if 'password error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="mb-3">
                         <label for="InputPassword1" class="form-label">Confirm Password</label>
                         <input type="text" class="form-control" id="InputPassword1" name="confirm_pw">
+                        {% for message in messages %}
+                        {% if 'confirm_pw error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="Check1">
@@ -56,10 +75,20 @@
                     <div class="mb-3">
                         <label for="LogInEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" id="LogInEmail" aria-describedby="emailHelp" name="email">
+                        {% for message in messages %}
+                        {% if 'not_existed_email error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="mb-5">
                         <label for="LogInPassword" class="form-label">Password</label>
                         <input type="text" class="form-control" id="LogInPassword" name="password">
+                        {% for message in messages %}
+                        {% if 'unmatched_pw error' == message.tags %}
+                        <p class="text-danger">{{message}}</p>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <button type="submit" class="btn btn-primary">Log In</button>
                 </form>
