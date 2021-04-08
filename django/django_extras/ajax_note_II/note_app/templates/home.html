@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Post II</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% load crispy_forms_tags %} 
+    <style type="text/css">
+        p > label {
+            display: block;
+        }
+        .asteriskField {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-2" id="custom-cards">
+        <h2 class="pb-2 border-bottom">My Notes</h2>
+        <h5 class="text-secondary mt-4">Latest 3 notes</h5>
+        <div class="row row-cols-3 align-items-stretch py-2">
+            {% for note in notes %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body form-group">
+                        <form action="{% url 'update' %}" method="POST" novalidate class="update_note">
+                        {% csrf_token %}
+                            <p><input type="text" name='title' value='{{note.title}}' class="form-control update_note"></p>
+                            <p><textarea name="content" class="form-control update_note" cols="40" rows="10">{{note.content}}</textarea></p>
+                            <input type="hidden" name='id' value="{{note.id}}">
+                            <!-- <button type="submit" class="btn btn-secondary">update!!</button> -->
+                        </form>
+                        <form action="{% url 'delete' %}" method="POST" novalidate class="mt-3 delete_note">
+                        {% csrf_token %}    
+                            <input type="hidden" name='id' value="{{note.id}}">
+                            <button type="submit" class="btn btn-danger">delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center">
+            <div class="mt-5">
+                <h4>Add a note:</h4>
+                <form action="{% url 'home' %}" method="POST" novalidate id='new_note'>
+                    {% csrf_token %}
+                    {{form|crispy}}    
+                    <button type="submit" class="btn btn-primary mt-3">Add new note!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#new_note').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{% url 'home' %}",
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    $('.container').html(serverResponse)
+                    console.log('success')
+                }
+            });
+        });
+
+        $('.update_note').on('change', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{% url 'update' %}",
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    $('.container').html(serverResponse)
+                    console.log('update')
+                }
+            });
+        });
+
+        $('.delete_note').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{% url 'delete' %}",
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    $('.container').html(serverResponse)
+                    console.log('delete')
+                }
+            });
+        });
+        // $('.title').click(function() {
+        //     $.ajax({
+        //         url: "{% url 'home' %}",
+        //         method: 'get',
+        //         // data: $(this).serialize(),
+        //         success: function() {
+        //             // $('.container').html(serverResponse)
+        //             $(this).html('<input type="text" value="{{note.title}}">')
+        //             // console.log('success')
+        //         }
+        //     });
+        // });
+        </script>
+</body>
+</html>
