@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{product.name}}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between">
+    <h3>Add a Product:</h3>
+    <a href="{% url 'products' %}">Go back to List</a>
+</div>
+        <div class="row">
+            <div class="col-6">
+                <form action="{% url 'editing' product.id %}" method="POST" novalidate>
+                    {% csrf_token %}
+                    {% load crispy_forms_tags %}
+                    {{form|crispy}}
+                    <div class="form-group d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary me-3">Update</button>
+                        <a href="{% url 'deleting' product.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

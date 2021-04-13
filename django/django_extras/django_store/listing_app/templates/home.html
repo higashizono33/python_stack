@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Product List{% endblock %}
+{% block list %}
+    {% for product in products %}
+    <tr>
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.manufacturer}}</td>
+        <td>{{product.name}}</td>
+        <td>${{product.price}}</td>
+        <td>{{product.created_at|date:"M d, Y"}}</td>
+        <td>
+            <a href="{% url 'editing' product.id %}" class="text-white">Edit</a> |
+            <a href="{% url 'deleting' product.id %}" class="text-white">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
