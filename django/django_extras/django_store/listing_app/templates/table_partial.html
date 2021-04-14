@@ -1,0 +1,13 @@
+{% for product in products %}
+    <tr>
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.manufacturer}}</td>
+        <td>{{product.name}}</td>
+        <td>${{product.price}}</td>
+        <td>{{product.created_at|date:"M d, Y"}}</td>
+        <td>
+            <a href="{% url 'editing' product.id %}" class="text-white">Edit</a> |
+            <a href="{% url 'deleting' product.id %}" class="text-white delete" product_id={{product.id}}>Delete</a>
+        </td>
+    </tr>
+{% endfor %}

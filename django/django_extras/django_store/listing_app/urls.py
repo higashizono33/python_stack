@@ -3,6 +3,6 @@ from .views import *
 
 urlpatterns = [
     path('products', Products.as_view(), name="products"),
-    path(r'^products/(?P<id>\d+)$', EditProduct.as_view(), name="editing"),
-    path(r'^products/(?P<id>\d+)/delete$', delete, name="deleting"),
+    path('products/<int:id>', EditProduct.as_view(), name="editing"),
+    path('products/<int:id>/delete', delete, name="deleting"),
 ]
