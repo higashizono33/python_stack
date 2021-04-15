@@ -1,0 +1,37 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <This is in django>\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 >>> from queies_app.models import *\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+ModuleNotFoundError: No module named 'queies_app'\
+>>> from queries_app.models import *\
+>>> Wizard.objects.create(name="Padma Patil", house="Ravenclaw", pet="None", year="5")\
+<Wizard: Wizard object (1)>\
+>>> ravenclaws = Wizard.objects.filter(house="Ravenclaw")\
+>>> print(ravenclaws)\
+<QuerySet [<Wizard: Wizard object (1)>]>\
+>>> Wizard.objects.create(name="Luna Lovegood", house="Ravenclaw", pet="None", year="4")\
+<Wizard: Wizard object (2)>\
+>>> print(ravenclaws)\
+<QuerySet [<Wizard: Wizard object (1)>, <Wizard: Wizard object (2)>]>\
+>>> luna = Wizard.objects.get(name="Luna Lovegood")\
+>>> luna.year = 5\
+>>> luna.save()\
+>>> print(luna.year)\
+5\
+>>> \
+\
+<This is in MySQLWorkbench>\
+SELECT * FROM hogwarts.Wizard;\
+INSERT INTO hogwarts.wizard (name, house, pet, year) VALUES ('Hermione Granger', 'Gryffindor', 'Crookshanks', '5');\
+SELECT * FROM hogwarts.wizard WHERE id = 1;\
+SELECT * FROM hogwarts.wizard WHERE house = 'Gryffindor';\
+UPDATE hogwarts.wizard SET year = '6' WHERE id = 1;\
+SELECT * FROM hogwarts.wizard WHERE id = 1;}
