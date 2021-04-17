@@ -1,0 +1,26 @@
+body {
+    padding-top: 50px;
+}
+.row {
+    display: flex;
+    justify-content: center;
+    /* outline: 1px solid black; */
+}
+.box1 {
+    height: 30px;
+    width: 30px;
+    background-color: red;
+}
+.box2 {
+    height: 30px;
+    width: 30px;
+    background-color: black;
+}
+.box3 {
+    height: 30px;
+    width: 30px;
+}
+.box4 {
+    height: 30px;
+    width: 30px;
+}
