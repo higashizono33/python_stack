@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container d-flex justify-content-center pt-5">
+        <div class="col-7">
+            <h1 class="mb-5"><mark>Submitted Info</mark></h1>
+            <div class="row mb-3">
+                <label for="name" class="col-sm-2 col-form-label text-end">Name</label>
+                <div class="col-sm-10 text-center">
+                    <h1>{{post[0].name}}</h1>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="location" class="col-sm-2 col-form-label text-end">Location</label>
+                <div class="col-sm-10 text-center">
+                    <h1>{{location[0].name}}</h1>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="language" class="col-sm-2 col-form-label text-end">Language</label>
+                <div class="col-sm-10 text-center">
+                    <h1>{{language[0].name}}</h1>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="comment" class="col-sm-2 col-form-label text-end">Comment</label>
+                <div class="col-sm-10 text-center">
+                    <h3>{{post[0].comment}}</h3>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="/"><button class="btn btn-primary px-5">Go Back</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
