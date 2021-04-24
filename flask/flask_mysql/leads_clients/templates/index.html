@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read All</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script>
+        window.onload = function(){
+            var options = {
+                title: {
+                    text: "Customers and number of new leads"
+                },
+                subtitles: [{
+                    text: ""
+                }],
+                animationEnabled: true,
+                data: [{
+                    type: "pie",
+                    startAngle: 40,
+                    toolTipContent: "<b>{label}</b>: {y}",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}",
+                    dataPoints: [
+                        { y: $('.count_1').html(), label: $('.name_1').html() },
+                        { y: $('.count_2').html(), label: $('.name_2').html() },
+                        { y: $('.count_3').html(), label: $('.name_3').html() },
+                        { y: $('.count_4').html(), label: $('.name_4').html() },
+                        { y: $('.count_5').html(), label: $('.name_5').html() },
+                        { y: $('.count_6').html(), label: $('.name_6').html() },
+                        { y: $('.count_7').html(), label: $('.name_7').html() },
+                        { y: $('.count_8').html(), label: $('.name_8').html() },
+                    ]
+                }]
+            };
+            $("#chartContainer").CanvasJSChart(options);
+        }
+    </script>
+</head>
+<body>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-6">
+                <form action="/filter_date" method="POST">
+                    <div class="mb-3 row">
+                        <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                        <div class="col-sm-5">
+                            <input type="date" class="form-control" name="start_date" min="2011-01-01" max="2013-12-31">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                        <div class="col-sm-5">
+                            <input type="date" class="form-control" name="end_date" min="2011-01-01" max="2013-12-31">
+                        </div>
+                    </div>
+                    <div class="mb-3 row d-flex justify-content-center">
+                        <div class="col-sm-2">
+                            <button class="btn btn-secondary">Update</button>
+                        </div>
+                    </div>
+                </form>
+                <h2>List of all customers and # of leads</h2>
+                <div class="overflow-auto" style="height: 450px;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Number of Leads</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                            <tr>
+                                <td class="name_{{loop.index}}">{{result.first_name}} {{result.last_name}}</td>
+                                <td class="count_{{loop.index}}">{{result.count}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <div id="chartContainer" style="height: 300px; width: 100%; margin-top: 210px;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
