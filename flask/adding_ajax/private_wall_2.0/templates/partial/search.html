@@ -1,0 +1,6 @@
+{% if users %}
+    <span>Username is taken</span>
+{% endif %}
+{% for user in users %}
+    <li class="text-danger" style="list-style: none;">{{user.username}}</li>
+{% endfor %}
