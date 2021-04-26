@@ -6,7 +6,7 @@
 }
 .transactions {
     overflow: auto;
-    height: 200px;
+    height: 130px;
     outline: black solid 2px;
 }
 .green {
